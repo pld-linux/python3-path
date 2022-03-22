@@ -6,13 +6,13 @@
 Summary:	Python 2 module wrapper for os.path
 Summary(pl.UTF-8):	Moduł Pythona 2 obudowujący os.path
 Name:		python3-path
-Version:	15.1.0
+Version:	16.4.0
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/simple/path/
 Source0:	https://files.pythonhosted.org/packages/source/p/path/path-%{version}.tar.gz
-# Source0-md5:	7fa391550400e7aa47849386d99598a7
+# Source0-md5:	a5b935b554ffa3889bb88fd19fc2669b
 URL:		https://github.com/jaraco/path
 BuildRequires:	python3 >= 1:3.6
 BuildRequires:	python3-modules >= 1:3.6
@@ -32,8 +32,9 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with doc}
 BuildRequires:	sphinx-pdg-3
-BuildRequires:	python3-alabaster
 BuildRequires:	python3-jaraco.packaging >= 8.2
+#BuildRequires:	python3-jaraco.packaging >= 9  # when available
+BuildRequires:	python3-jaraco.tidelift >= 1.4
 BuildRequires:	python3-rst.linker >= 1.9
 %endif
 Requires:	python3-modules >= 1:3.6
@@ -64,6 +65,12 @@ Dokumentacja modułu Pythona path.
 %prep
 %setup -q -n path-%{version}
 
+# stub for setuptools
+cat >setup.py <<EOF
+from setuptools import setup
+setup()
+EOF
+
 %build
 %py3_build
 
@@ -75,6 +82,7 @@ PYTEST_PLUGINS="pytest_black,pytest_cov.plugin,pytest_flake8" \
 
 %if %{with doc}
 # disable warnings (-W in SPHINXOPTS) to ignore objects.inv fetching error on builders
+PYTHONPATH=$(pwd) \
 %{__make} -C docs html \
 	SPHINXBUILD=sphinx-build-3 \
 	SPHINXOPTS=
