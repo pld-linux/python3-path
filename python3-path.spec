@@ -7,7 +7,7 @@ Summary:	Python 2 module wrapper for os.path
 Summary(pl.UTF-8):	Moduł Pythona 2 obudowujący os.path
 Name:		python3-path
 Version:	16.4.0
-Release:	3
+Release:	4
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/simple/path/
