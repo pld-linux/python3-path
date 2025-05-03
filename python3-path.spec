@@ -3,16 +3,16 @@
 %bcond_without	doc	# Sphinx documentation
 %bcond_without	tests	# py.test unit tests
 
-Summary:	Python 2 module wrapper for os.path
-Summary(pl.UTF-8):	Moduł Pythona 2 obudowujący os.path
+Summary:	Python module wrapper for os.path
+Summary(pl.UTF-8):	Moduł Pythona obudowujący os.path
 Name:		python3-path
-Version:	16.7.1
-Release:	3
+Version:	17.1.0
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.python.org/simple/path/
 Source0:	https://files.pythonhosted.org/packages/source/p/path/path-%{version}.tar.gz
-# Source0-md5:	d9629dcbc0cfe3088435f7521f4d7833
+# Source0-md5:	3f03cdccfa0fdd9dee34c445701d4a31
 URL:		https://github.com/jaraco/path
 BuildRequires:	python3 >= 1:3.8
 BuildRequires:	python3-modules >= 1:3.8
@@ -82,8 +82,8 @@ EOF
 
 %if %{with tests}
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
-PYTEST_PLUGINS="pytest_black,pytest_cov.plugin,pytest_flake8" \
-%{__python3} -m pytest test_path.py
+PYTEST_PLUGINS="black,pytest_cov.plugin,pytest_flake8" \
+%{__python3} -m pytest build-3
 %endif
 
 %if %{with doc}
